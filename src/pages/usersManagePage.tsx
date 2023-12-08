@@ -1,12 +1,5 @@
-
-
 const UsersManagePage = ({}) => {
-  
-  return (
-<>
+  return <></>;
+};
 
-</>
-)
-}
-
-export default UsersManagePage
+export default UsersManagePage;
