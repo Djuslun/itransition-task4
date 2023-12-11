@@ -26,7 +26,7 @@ const RegistrationPage = ({}) => {
         />
         <AuthButton>Create an account</AuthButton>
         <AuthFormLink
-          to="#"
+          to="/login"
           linkTitle="Already have an account?"
           linkText="Login here"
         />

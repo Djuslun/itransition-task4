@@ -10,6 +10,7 @@ const RegistrationPage = lazy(
   () => import("./registrationPage/registrationPage")
 );
 const UsersPage = lazy(() => import("./usersPage/usersPage"));
+const LoginPage = lazy(() => import("./loginPage/loginPage"));
 
 export const AppRouter = () => {
   return (
@@ -19,8 +20,9 @@ export const AppRouter = () => {
       <Router>
         <main className="bg-gray-900 min-h-screen">
           <Routes>
-            <Route index path="/" element={<Navigate to={"/auth"} />} />
+            <Route index path="/" element={<Navigate to={"/registration"} />} />
             <Route index path="/registration" element={<RegistrationPage />} />
+            <Route index path="/login" element={<LoginPage />} />
             <Route index path="/users" element={<UsersPage />} />
             <Route path="*" element={<>Not found</>} />
           </Routes>

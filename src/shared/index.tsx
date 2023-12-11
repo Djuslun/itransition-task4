@@ -1,7 +1,5 @@
-import { InputBox } from "./ui/inputBox";
-import FormTitle from "./ui/formTitle";
-import AuthFormWrapper from "./ui/authFormWrapper";
-import AuthFormLink from "./ui/authFormLink";
-import AuthButton from "./ui/authButton";
-
-export { InputBox, FormTitle, AuthFormWrapper, AuthFormLink, AuthButton };
+export { InputBox } from "./ui/inputBox";
+export { default as FormTitle } from "./ui/formTitle";
+export { default as AuthFormWrapper } from "./ui/authFormWrapper";
+export { default as AuthFormLink } from "./ui/authFormLink";
+export { default as AuthButton } from "./ui/authButton";
