@@ -18,7 +18,7 @@ export const AppRouter = () => {
   return (
     <Suspense fallback={<div className="bg-gray-900 min-h-screen"></div>}>
       <Router>
-        <main className="bg-gray-900 min-h-screen">
+        <main>
           <Routes>
             <Route index path="/" element={<MainPage />} />
             <Route index path="/registration" element={<RegistrationPage />} />

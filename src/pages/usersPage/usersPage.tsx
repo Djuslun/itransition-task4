@@ -26,21 +26,19 @@ const UsersPage = () => {
           Delete
         </Button>
       </div>
-      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-        <div className=" m-auto min-w-96">
-          {userData && (
-            <DataGrid
-              rows={userData}
-              columns={columns}
-              checkboxSelection
-              autoHeight
-              hideFooter
-              onRowSelectionModelChange={setRowSelectionModel}
-              rowSelectionModel={rowSelectionModel}
-              sx={sx}
-            />
-          )}
-        </div>
+      <div className=" m-auto min-w-96">
+        {userData && (
+          <DataGrid
+            rows={userData}
+            columns={columns}
+            checkboxSelection
+            autoHeight
+            hideFooter
+            onRowSelectionModelChange={setRowSelectionModel}
+            rowSelectionModel={rowSelectionModel}
+            sx={sx}
+          />
+        )}
       </div>
     </div>
   );
