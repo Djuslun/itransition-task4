@@ -8,7 +8,6 @@ const [errorMessage, setErrorMessage] = useState<string>("");
     if (isCustomError(error)) {
       setErrorMessage(error.data.message);
     }
-    // console.log(errorMessage);
   }, [error]);
 
   return errorMessage

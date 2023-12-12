@@ -1,6 +1,6 @@
-import apiSlice from './apiSlice';
-import { IUser, IUserLoginRequestBody, IUserRegistrationRequestBody } from './user';
-import { AuthResponse } from './authResponse';
+import {apiSlice} from 'shared/api';
+import { IUser, IUserLoginRequestBody, IUserRegistrationRequestBody } from '../types/user';
+import { AuthResponse } from '../types/authResponse';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

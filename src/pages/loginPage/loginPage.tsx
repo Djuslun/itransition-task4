@@ -5,8 +5,9 @@ import {
   AuthFormWrapper,
   AuthFormLink,
   AuthButton,
-} from "shared";
-import { FormikField } from "shared";
+  FormikField,
+} from "shared/ui";
+
 import { initialValues, validationSchema } from "./consts";
 
 const LoginPage = ({}) => {

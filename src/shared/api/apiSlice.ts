@@ -1,7 +1,7 @@
 import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { RootState } from './store';
-import { CustomError } from 'shared';
+import { RootState } from '../../app/store';
+import { CustomError } from 'shared/errorHandle';
 
 type CustomBaseQueryFn = BaseQueryFn<
   string | FetchArgs,

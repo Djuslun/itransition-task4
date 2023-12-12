@@ -5,12 +5,12 @@ import {
   AuthFormWrapper,
   AuthFormLink,
   AuthButton,
-} from "shared";
+  FormikField,
+} from "shared/ui";
 import { initialValues, validationSchema } from "./consts";
-import { FormikField } from "shared";
-import { useRegistrationMutation } from "shared/api/userApiSlice";
-import Snackbar from "shared/ui/snackBar";
-import { useErrorMessage } from "shared/api/hooks/useErrorMessage";
+import { useRegistrationMutation } from "entities/user";
+import { Snackbar } from "shared/ui";
+import { useErrorMessage } from "shared/api";
 
 const RegistrationPage = ({}) => {
   const [registration, { isLoading, isError, error }] =

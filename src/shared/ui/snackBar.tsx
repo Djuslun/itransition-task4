@@ -4,13 +4,13 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState, SyntheticEvent, useEffect } from "react";
 
-export default function Snackbar({
+export const Snackbar = ({
   isOpen,
   message,
 }: {
   isOpen: boolean;
   message: string;
-}) {
+}) => {
   const [open, setOpen] = useState<boolean>(isOpen);
 
   useEffect(() => {
@@ -49,4 +49,4 @@ export default function Snackbar({
       />
     </div>
   );
-}
+};

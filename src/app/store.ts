@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import apiSlice from './apiSlice';
-import userReducer from './userSlice';
-import { rtkQueryErrorLogger } from './errorHandleMiddleware';
+import {apiSlice} from '../shared/api';
+import {userReducer} from '../entities/user';
+import { errorHandleMiddleware } from '../shared/errorHandle';
 
 const store = configureStore({
   reducer: {
@@ -10,7 +10,7 @@ const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, rtkQueryErrorLogger),
+    getDefaultMiddleware().concat(apiSlice.middleware, errorHandleMiddleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from './user';
+import { IUser } from '../types/user';
 
 interface UserState {
   token: string;
