@@ -11,12 +11,14 @@ export const useRefreshToken = (): {isLoading :boolean, isError :boolean, errorM
   const {data: user, isLoading, isError, error} = useRefreshTokenQuery()
   const errorMessage = useErrorMessage(error)
 
-  useEffect(()=> {  
+  useEffect(()=> {
     if(!isLoading && user) {
       dispatch(setUser(user.user))
       dispatch(setAccsesToken(user.accessToken))
       localStorage.setItem('accessToken', user.accessToken)
       navigate('/users')
+    } else {
+      navigate('/registration')
     }
   }, [isLoading])
 
