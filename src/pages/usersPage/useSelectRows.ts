@@ -5,7 +5,7 @@ export const useSelectRows = () => {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
   useEffect(() => {
-    console.log(rowSelectionModel);
+    // console.log(rowSelectionModel);
   }, [rowSelectionModel]);
 
   return {rowSelectionModel, setRowSelectionModel}

@@ -13,9 +13,12 @@ const UsersPage = () => {
   const { handleLogout } = useLogout();
   const { user } = useAppSelector((store) => store.user);
 
-  console.log(user);
-  if (!user.id || !user.isActive) {
+  if (user?.id && !user?.isActive) {
     return <Navigate to={"/login"} />;
+  }
+
+  if (!user) {
+    return <Navigate to={"/"} />;
   }
 
   const userData = data?.map((user) => ({

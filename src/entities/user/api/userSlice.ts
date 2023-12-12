@@ -4,19 +4,13 @@ import { IUser } from '../types/user';
 
 interface UserState {
   token: string;
-  user: IUser;
+  user: IUser | null;
   errorMessage: string;
 }
 
 const initialState: UserState = {
   token: localStorage.getItem('accessToken') || '',
-  user: {
-    id: '',
-    email: '',
-    name: '',
-    isActive: false,
-    last_login: ''
-  },
+  user: null,
   errorMessage: ''
 };
 
@@ -32,7 +26,13 @@ const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.token = '';
-      state.user = initialState.user;
+      state.user = {
+        id: '',
+        email: '',
+        name: '',
+        isActive: false,
+        last_login: ''
+      };
     },
     setErrorMessage: (state, action: PayloadAction<string>) => {
       state.errorMessage = action.payload
