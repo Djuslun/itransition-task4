@@ -10,7 +10,10 @@ type CustomBaseQueryFn = BaseQueryFn<
   Record<string, unknown>
 >;
 
-const baseQuery: CustomBaseQueryFn = fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL,
+const baseQuery: CustomBaseQueryFn = fetchBaseQuery({
+  baseUrl: process.env.REACT_APP_BASE_URL,
+  credentials: 'include',
+    mode: 'cors',
   prepareHeaders(headers, { getState }) {
     const { token } = (getState() as RootState).user;
 

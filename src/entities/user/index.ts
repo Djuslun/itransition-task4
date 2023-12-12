@@ -1,4 +1,4 @@
-export {setAccsesToken} from './api/userSlice'
+export {clearErrorMessage,logoutUser,setAccsesToken,setErrorMessage,setUser} from './api/userSlice'
 export {default as userReducer} from './api/userSlice'
 export {
   useChangeActiveStatusMutation, 
@@ -6,4 +6,7 @@ export {
   useLogoutMutation,
   useLoginMutation,
   useGetUsersQuery,
-  useRegistrationMutation} from './api/userApiSlice'
+  useRegistrationMutation,
+  useRefreshTokenQuery
+} from './api/userApiSlice'
+export type {IUserLoginRequestBody} from './types/user'

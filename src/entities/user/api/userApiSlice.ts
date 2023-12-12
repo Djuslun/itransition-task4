@@ -27,6 +27,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [],
     }),
+    refreshToken: builder.query<AuthResponse, void>({
+      query: () => ({
+        url: `${process.env.REACT_APP_BASE_URL}/refresh`,
+        method: "GET",
+      }),
+      providesTags: [],
+    }),
     changeActiveStatus: builder.mutation<IUser, boolean>({
       query: (activeStatus: boolean) => ({
         url: `${process.env.REACT_APP_BASE_URL}new`,
@@ -59,4 +66,5 @@ useLogoutMutation,
 useLoginMutation,
 useGetUsersQuery,
 useRegistrationMutation,
+useRefreshTokenQuery,
 } = userApiSlice;

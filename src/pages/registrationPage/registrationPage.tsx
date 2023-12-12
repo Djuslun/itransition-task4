@@ -7,17 +7,17 @@ import {
   AuthButton,
   FormikField,
   Loader,
+  Snackbar,
 } from "shared/ui";
 import { initialValues, validationSchema } from "./consts";
 import { useRegistrationMutation } from "entities/user";
-import { Snackbar } from "shared/ui";
 import { useErrorMessage } from "shared/api";
 
 const RegistrationPage = ({}) => {
   const [registration, { isLoading, isError, error }] =
     useRegistrationMutation();
   const errorMessage = useErrorMessage(error);
-  console.log(isLoading);
+
   return (
     <>
       <AuthFormWrapper>

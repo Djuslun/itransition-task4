@@ -7,6 +7,8 @@ const [errorMessage, setErrorMessage] = useState<string>("");
   useEffect(() => {
     if (isCustomError(error)) {
       setErrorMessage(error.data.message);
+    } else {
+      setErrorMessage(error?.message)
     }
   }, [error]);
 
