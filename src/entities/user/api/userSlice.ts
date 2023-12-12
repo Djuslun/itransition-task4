@@ -15,7 +15,7 @@ const initialState: UserState = {
     email: '',
     name: '',
     isActive: false,
-    last_login: null
+    last_login: ''
   },
   errorMessage: ''
 };

@@ -10,5 +10,5 @@ export interface IUserRegistrationRequestBody extends IUserLoginRequestBody{
 export interface IUser extends Omit<IUserRegistrationRequestBody, 'password'> {
   id: string;
   isActive: boolean;
-  last_login: Date | null;
+  last_login: string | Date;
 }

@@ -1,34 +1,17 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { rows } from "./rows";
+import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/base/Button";
-import { sx } from "./tableStyles";
+import { sx, columns } from "./tableSettings";
 import { useSelectRows } from "./useSelectRows";
-
-const columns: GridColDef[] = [
-  {
-    field: "name",
-    headerName: "Name",
-    flex: 0.5,
-    minWidth: 100,
-  },
-  { field: "email", headerName: "Email", flex: 1, minWidth: 300 },
-  {
-    field: "last_login",
-    headerName: "Last login",
-    type: "date",
-    flex: 1,
-    minWidth: 100,
-  },
-  {
-    field: "status",
-    headerName: "Status",
-    flex: 1,
-    minWidth: 100,
-  },
-];
+import { useGetUsersQuery } from "entities/user";
 
 const UsersPage = () => {
   const { rowSelectionModel, setRowSelectionModel } = useSelectRows();
+  const { data, isLoading, isError } = useGetUsersQuery();
+
+  const userData = data?.map((user) => ({
+    ...user,
+    last_login: new Date(user.last_login),
+  }));
 
   return (
     <div className="p-5">
@@ -45,16 +28,18 @@ const UsersPage = () => {
       </div>
       <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
         <div className=" m-auto min-w-96">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            checkboxSelection
-            autoHeight
-            hideFooter
-            onRowSelectionModelChange={setRowSelectionModel}
-            rowSelectionModel={rowSelectionModel}
-            sx={sx}
-          />
+          {userData && (
+            <DataGrid
+              rows={userData}
+              columns={columns}
+              checkboxSelection
+              autoHeight
+              hideFooter
+              onRowSelectionModelChange={setRowSelectionModel}
+              rowSelectionModel={rowSelectionModel}
+              sx={sx}
+            />
+          )}
         </div>
       </div>
     </div>
