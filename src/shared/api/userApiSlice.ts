@@ -58,4 +58,5 @@ useDeleteUserMutation,
 useLogoutMutation,
 useLoginMutation,
 useGetUsersQuery,
+useRegistrationMutation,
 } = userApiSlice;

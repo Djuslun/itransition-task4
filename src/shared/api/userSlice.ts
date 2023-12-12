@@ -14,7 +14,7 @@ const initialState: UserState = {
     email: '',
     name: '',
     isActive: false,
-    last_login: new Date()
+    last_login: null
   }
 };
 
