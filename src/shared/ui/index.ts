@@ -1,3 +1,4 @@
+export { Loader } from "./loader";
 export {Snackbar} from "./snackBar";
 export { InputBox } from "./inputBox";
 export { default as FormTitle } from "./formTitle";

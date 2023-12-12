@@ -6,6 +6,7 @@ import {
   AuthFormLink,
   AuthButton,
   FormikField,
+  Loader,
 } from "shared/ui";
 import { initialValues, validationSchema } from "./consts";
 import { useRegistrationMutation } from "entities/user";
@@ -16,7 +17,7 @@ const RegistrationPage = ({}) => {
   const [registration, { isLoading, isError, error }] =
     useRegistrationMutation();
   const errorMessage = useErrorMessage(error);
-
+  console.log(isLoading);
   return (
     <>
       <AuthFormWrapper>
@@ -70,6 +71,7 @@ const RegistrationPage = ({}) => {
         </Formik>
       </AuthFormWrapper>
       <Snackbar isOpen={isError} message={errorMessage} />
+      <Loader isLoading={isLoading} />
     </>
   );
 };
