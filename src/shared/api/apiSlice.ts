@@ -60,7 +60,7 @@ Record<string, unknown>
 export const apiSlice = createApi({
   reducerPath: 'apiSlice',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Token'],
   endpoints: () => ({}),
 });
 

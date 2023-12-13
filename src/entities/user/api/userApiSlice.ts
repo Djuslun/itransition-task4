@@ -2,6 +2,11 @@ import {apiSlice} from 'shared/api';
 import { IUser, IUserLoginRequestBody, IUserRegistrationRequestBody } from '../types/user';
 import { AuthResponse } from '../types/authResponse';
 
+interface IChangeUserStatus {
+  userIds: string[];
+  activeStatus: boolean;
+}
+
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     registration: builder.mutation<AuthResponse, IUserRegistrationRequestBody>({
@@ -10,7 +15,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: newUser
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Token"],
     }),
     login: builder.mutation<AuthResponse, IUserLoginRequestBody>({
       query: (user: IUserLoginRequestBody) => ({
@@ -18,7 +23,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: user
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User","Token"],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
@@ -27,27 +32,28 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [],
     }),
-    refreshToken: builder.query<AuthResponse, void>({
-      query: () => ({
+    refreshToken: builder.query<AuthResponse, string>({
+      query: (accessToken: string) => ({
         url: `${process.env.REACT_APP_BASE_URL}/refresh`,
-        method: "GET",
+        method: "GET"
       }),
-      providesTags: [],
+      providesTags: ["Token"],
     }),
-    changeActiveStatus: builder.mutation<IUser, boolean>({
-      query: (activeStatus: boolean) => ({
-        url: `${process.env.REACT_APP_BASE_URL}new`,
+    changeActiveStatus: builder.mutation<IUser[], IChangeUserStatus>({
+      query: ({userIds, activeStatus}: IChangeUserStatus) => ({
+        url: `${process.env.REACT_APP_BASE_URL}/block`,
         method: "PATCH",
-        body: {activeStatus},
+        body: {activeStatus, userIds},
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Token"],
     }),
-    deleteUser: builder.mutation<IUser, string>({
-      query: (userId: string) => ({
-        url: `${process.env.REACT_APP_BASE_URL}/delete/${userId}`,
+    deleteUser: builder.mutation<IUser[], string[]>({
+      query: (userIds: string[]) => ({
+        url: `${process.env.REACT_APP_BASE_URL}/delete`,
         method: "DELETE",
+        body: userIds
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Token"],
     }),
     getUsers: builder.query<IUser[], void>({
       query: () => ({

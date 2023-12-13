@@ -6,15 +6,18 @@ import { useGetUsersQuery } from "entities/user";
 import { useLogout } from "./useLogout";
 import { useAppSelector } from "shared/api";
 import { Navigate } from "react-router-dom";
+import { useDeleteUserMutation } from "entities/user";
+import { useChangeActiveStatusMutation } from "entities/user";
 
 const UsersPage = () => {
   const { rowSelectionModel, setRowSelectionModel } = useSelectRows();
   const { data, isLoading, isError, refetch } = useGetUsersQuery();
+  const [deleteUsers] = useDeleteUserMutation();
+  const [changeActiveStatus] = useChangeActiveStatusMutation();
   const { handleLogout } = useLogout();
   const { user } = useAppSelector((store) => store.user);
 
-  console.log(user);
-  if (!user?.id && !user?.isActive) {
+  if (!user?.id || !user?.isActive) {
     return <Navigate to={"/login"} />;
   }
 
@@ -28,18 +31,34 @@ const UsersPage = () => {
   }));
 
   return (
-    <div className="p-5">
+    <div>
       <div className="flex gap-2 m-auto min-w-96 mb-4">
         <Button
-          onClick={() => refetch()}
+          onClick={() =>
+            changeActiveStatus({
+              userIds: rowSelectionModel as string[],
+              activeStatus: false,
+            })
+          }
           className="px-4 py-2 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all"
         >
           Block
         </Button>
-        <Button className="px-2 py-1 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all">
+        <Button
+          onClick={() =>
+            changeActiveStatus({
+              userIds: rowSelectionModel as string[],
+              activeStatus: true,
+            })
+          }
+          className="px-2 py-1 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all"
+        >
           Unblock
         </Button>
-        <Button className="px-2 py-1 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all">
+        <Button
+          onClick={() => deleteUsers(rowSelectionModel as string[])}
+          className="px-2 py-1 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all"
+        >
           Delete
         </Button>
         <Button

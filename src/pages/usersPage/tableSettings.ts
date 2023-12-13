@@ -40,7 +40,7 @@ export const columns: GridColDef[] = [
   {
     field: "status",
     valueGetter: (params) => {
-      if (params) {
+      if (params.row.isActive) {
         return "Active";
       } else {
         return "Blocked";

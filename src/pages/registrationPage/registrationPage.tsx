@@ -10,13 +10,12 @@ import {
   Snackbar,
 } from "shared/ui";
 import { initialValues, validationSchema } from "./consts";
-import { useRegistrationMutation } from "entities/user";
-import { useErrorMessage } from "shared/api";
+
+import { useRegistration } from "./useRegistration";
 
 const RegistrationPage = ({}) => {
-  const [registration, { isLoading, isError, error }] =
-    useRegistrationMutation();
-  const errorMessage = useErrorMessage(error);
+  const { handleRegistration, errorMessage, isError, isLoading } =
+    useRegistration();
 
   return (
     <>
@@ -25,11 +24,9 @@ const RegistrationPage = ({}) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={({ name, password, email }) => {
-            registration({ name, password, email })
-              .unwrap()
-              .catch((e) => console.log(e.message));
-          }}
+          onSubmit={({ name, password, email }) =>
+            handleRegistration({ name, password, email })
+          }
         >
           <Form className="space-y-4 md:space-y-6">
             <FormikField
