@@ -1,11 +1,12 @@
-import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-import { RootState } from '../../app/store';
+import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+import { setAccsesToken, logoutUser } from 'entities/user';
+import { RootState } from 'app/store';
 import { CustomError } from 'shared/errorHandle';
+import { AuthResponse } from 'entities/user';
 
 type CustomBaseQueryFn = BaseQueryFn<
   string | FetchArgs,
-  unknown,
+  AuthResponse,
   CustomError,
   Record<string, unknown>
 >;
@@ -13,7 +14,7 @@ type CustomBaseQueryFn = BaseQueryFn<
 const baseQuery: CustomBaseQueryFn = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_BASE_URL,
   credentials: 'include',
-    mode: 'cors',
+  mode: 'cors',
   prepareHeaders(headers, { getState }) {
     const { token } = (getState() as RootState).user;
 
@@ -25,9 +26,40 @@ const baseQuery: CustomBaseQueryFn = fetchBaseQuery({
   },
 }) as CustomBaseQueryFn
 
+const baseQueryWithReauth: BaseQueryFn<
+string | FetchArgs,
+AuthResponse,
+CustomError,
+Record<string, unknown>
+> = async (
+  args,
+  api,
+  extraOptions
+) => {
+  let result = await baseQuery(args, api, extraOptions);
+
+  if (result.error && result.error.status === 401) {
+  const refreshResult = await baseQuery({
+        url: `${process.env.REACT_APP_BASE_URL}/refresh`,
+        method: 'GET'
+      }, api, extraOptions);
+
+      if (refreshResult.data) {
+        console.log(refreshResult.data)
+        api.dispatch(setAccsesToken(refreshResult.data.accessToken));
+
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+          api.dispatch(logoutUser());
+      }
+  }
+  return result;
+} 
+
+
 export const apiSlice = createApi({
   reducerPath: 'apiSlice',
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReauth,
   tagTypes: ['User'],
   endpoints: () => ({}),
 });

@@ -3,11 +3,9 @@ import { useAppDispath } from "shared/api"
 import { setUser, setAccsesToken } from "entities/user"
 import { useEffect } from "react"
 import { useErrorMessage } from "shared/api"
-// import { useNavigate } from "react-router-dom"
 
 export const useRefreshToken = (): {isLoading :boolean, isError :boolean, errorMessage: string} => {
   const dispatch = useAppDispath()
-  // const navigate =  useNavigate()
   const {data: user, isLoading, isError, error} = useRefreshTokenQuery()
   const errorMessage = useErrorMessage(error)
 

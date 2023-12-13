@@ -10,3 +10,4 @@ export {
   useRefreshTokenQuery
 } from './api/userApiSlice'
 export type {IUserLoginRequestBody} from './types/user'
+export type { AuthResponse} from './types/authResponse'

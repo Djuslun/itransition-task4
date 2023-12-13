@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import {apiSlice} from '../shared/api';
 import {userReducer} from '../entities/user';
-import { errorHandleMiddleware } from '../shared/errorHandle';
 
 const store = configureStore({
   reducer: {
@@ -10,7 +9,7 @@ const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, errorHandleMiddleware),
+    getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

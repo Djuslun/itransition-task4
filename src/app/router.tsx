@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { lazy } from "react";
-import { useAppSelector } from "shared/api";
+import { TRedirectUrl } from "./useRedirect";
 
 const RegistrationPage = lazy(
   () => import("pages/registrationPage/registrationPage")
@@ -14,10 +14,7 @@ const RegistrationPage = lazy(
 const UsersPage = lazy(() => import("pages/usersPage/usersPage"));
 const LoginPage = lazy(() => import("pages/loginPage/loginPage"));
 
-export const AppRouter = () => {
-  const { user } = useAppSelector((store) => store.user);
-  const redirectUrl = user ? "/users" : "/registration";
-
+export const AppRouter = ({ redirectUrl }: { redirectUrl: TRedirectUrl }) => {
   return (
     <Suspense fallback={<div className="bg-gray-900 min-h-screen"></div>}>
       <Router>

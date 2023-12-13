@@ -9,11 +9,12 @@ import { Navigate } from "react-router-dom";
 
 const UsersPage = () => {
   const { rowSelectionModel, setRowSelectionModel } = useSelectRows();
-  const { data, isLoading, isError } = useGetUsersQuery();
+  const { data, isLoading, isError, refetch } = useGetUsersQuery();
   const { handleLogout } = useLogout();
   const { user } = useAppSelector((store) => store.user);
 
-  if (user?.id && !user?.isActive) {
+  console.log(user);
+  if (!user?.id && !user?.isActive) {
     return <Navigate to={"/login"} />;
   }
 
@@ -29,7 +30,10 @@ const UsersPage = () => {
   return (
     <div className="p-5">
       <div className="flex gap-2 m-auto min-w-96 mb-4">
-        <Button className="px-4 py-2 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all">
+        <Button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all"
+        >
           Block
         </Button>
         <Button className="px-2 py-1 bg-violet-950 rounded-md text-white hover:bg-violet-600 transition-all">
