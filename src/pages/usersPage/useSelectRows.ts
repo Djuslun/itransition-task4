@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {  GridRowSelectionModel } from "@mui/x-data-grid";
 
 export const useSelectRows = () => {
-  const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel | string>([]);
+  const [userIds, setUserIds] = useState<GridRowSelectionModel | string[]>([]);
 
-  useEffect(() => {
-    // console.log(rowSelectionModel);
-  }, [rowSelectionModel]);
-
-  return {rowSelectionModel, setRowSelectionModel}
+  return {userIds, setUserIds}
 }

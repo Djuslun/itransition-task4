@@ -9,5 +9,5 @@ export {
   useRegistrationMutation,
   useRefreshTokenQuery
 } from './api/userApiSlice'
-export type {IUserLoginRequestBody ,IUserRegistrationRequestBody} from './types/user'
+export type {IUserLoginRequestBody ,IUserRegistrationRequestBody, IUser} from './types/user'
 export type { AuthResponse} from './types/authResponse'
