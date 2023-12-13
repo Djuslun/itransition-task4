@@ -6,7 +6,13 @@ export const Loader = ({ isLoading }: { isLoading: boolean }) => {
     <>
       {isLoading && (
         <Stack
-          sx={{ width: "100%", color: "grey.500", position: "fixed", top: "0" }}
+          sx={{
+            width: "100%",
+            color: "grey.500",
+            position: "fixed",
+            top: "0",
+            left: "0",
+          }}
           spacing={2}
         >
           <LinearProgress color="primary" />

@@ -17,7 +17,7 @@ export const ToolBar = ({ userIds }: { userIds: string[] }) => {
 
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-between md:justify-start">
         <Button
           handleClick={() =>
             handleChangeUserStatus({

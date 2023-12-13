@@ -21,7 +21,7 @@ const UsersPage = () => {
     <NavigateWithoutUser user={user}>
       <Snackbar isOpen={isError} message="" />
       <Loader isLoading={isLoading} />
-      <div className="flex justify-between  m-auto min-w-96 mb-4">
+      <div className="flex justify-between  m-auto min-w-96 mb-4 md:flex-row flex-col-reverse gap-1">
         <ToolBar userIds={userIds as string[]} />
         <LogoutBar userName={user?.name as string} />
       </div>

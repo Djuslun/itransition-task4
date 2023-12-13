@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { lazy } from "react";
 import { TRedirectUrl } from "./useRedirect";
+import { Loader } from "shared/ui";
 
 const RegistrationPage = lazy(
   () => import("pages/registrationPage/registrationPage")
@@ -16,7 +17,7 @@ const LoginPage = lazy(() => import("pages/loginPage/loginPage"));
 
 export const AppRouter = ({ redirectUrl }: { redirectUrl: TRedirectUrl }) => {
   return (
-    <Suspense fallback={<div className="bg-gray-900 min-h-screen"></div>}>
+    <Suspense fallback={<Loader isLoading={true} />}>
       <Router>
         <main>
           <Routes>
